@@ -1,0 +1,16 @@
+mutation LoginWithUserKey($secret: String!, $userKeyId: ObjectID!) {
+  createSessionUsingUserKey(input: { userKeyId: $userKeyId, secret: $secret }) {
+    token
+  }
+}
+query MyAccounts {
+  me {
+    accounts(first: 10) {
+      totalCount
+      nodes {
+        id
+        name
+      }
+    }
+  }
+}
