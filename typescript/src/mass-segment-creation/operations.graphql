@@ -1,0 +1,38 @@
+query masssegments_GetAccountProjects($accountId: ObjectID!, $after: String) {
+  getAccount(id: $accountId) {
+    projects(first: 100, after: $after) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      nodes {
+        id
+        name
+      }
+    }
+  }
+}
+
+query masssegments_GetProjectSegments($projectId: ObjectID!, $after: String) {
+  getProject(id: $projectId) {
+    segments(first: 100, after: $after) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      nodes {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation masssegments_createSegment($input: CreateCrawlUrlSegmentInput!) {
+  createCrawlUrlSegment(input: $input) {
+    segment {
+      id
+      name
+    }
+  }
+}
