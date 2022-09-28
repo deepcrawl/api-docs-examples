@@ -14,6 +14,7 @@ generates:
         CompareToCrawl: "string | number"
         ObjectID: "string | number"
         JSONObject: "any"
+        JSON: "any"
         DateTime: "string"
         Upload: "unknown"
       strictScalars: true
