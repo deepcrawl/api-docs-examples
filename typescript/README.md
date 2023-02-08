@@ -5,7 +5,7 @@ Example from [DeepCrawl GraphQL API Documentation](https://graph-docs.deepcrawl.
 
 ```bash
 yarn install
-curl https://graph.deepcrawl.com/schema.graphql > schema.graphql
+curl https://api.lumar.io/schema.graphql > schema.graphql
 yarn graphql-codegen
 export DEEPCRAWL_SECRET_ID=
 export DEEPCRAWL_SECRET=

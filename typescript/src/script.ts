@@ -10,7 +10,7 @@ if (!deepcrawlSecretId || !deepcrawlSecret) {
 }
 
 async function main() {
-  const client = new GraphQLClient("https://graph.deepcrawl.com/", {
+  const client = new GraphQLClient("https://api.lumar.io/graphql", {
     headers: {
       "apollographql-client-name": `your-client-name`,
     },

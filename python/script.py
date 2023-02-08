@@ -4,7 +4,7 @@ from graphql import build_schema
 import json
 import os
 
-transport = AIOHTTPTransport(url="https://graph.deepcrawl.com/", headers={})
+transport = AIOHTTPTransport(url="https://api.lumar.io/graphql", headers={})
 
 with open('./schema.graphql') as source:
     document = source.read()
