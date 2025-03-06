@@ -1,16 +1,8 @@
 import { GraphQLClient } from "graphql-request";
+
 import { getSdk } from "../sdk";
+
 import { run } from "./script"
-
-const deepcrawlSecretId = process.env.DEEPCRAWL_SECRET_ID;
-const deepcrawlSecret = process.env.DEEPCRAWL_SECRET;
-
-if (!deepcrawlSecretId || !deepcrawlSecret) {
-  console.error(
-    "You must set the DEEPCRAWL_SECRET_ID and DEEPCRAWL_SECRET environment variables."
-  );
-  process.exit(1);
-}
 
 async function main() {
   const client = new GraphQLClient("https://api.lumar.io/graphql", {
@@ -20,20 +12,29 @@ async function main() {
   });
   const sdk = getSdk(client);
 
-  const sessionTokenResponse = await sdk.LoginWithUserKey({
-    userKeyId: process.env.DEEPCRAWL_SECRET_ID!,
-    secret: process.env.DEEPCRAWL_SECRET!,
+  const { createSessionUsingUserKey } = await sdk.LoginWithUserKey({
+    input: {
+      userKeyId: process.env.LUMAR_USER_KEY_ID!,
+      secret: process.env.LUMAR_SECRET!,
+    },
   });
 
-  client.setHeader(
-    "x-auth-token",
-    sessionTokenResponse.createSessionUsingUserKey.token
-  );
+  client.setHeader("x-auth-token", createSessionUsingUserKey.token);
 
   await run(sdk);
 }
 
-main().catch((err) => {
-  console.error("Unexpected error occurect", err);
-  process.exit(1);
-});
+if (require.main === module) {
+  if (!process.env.LUMAR_USER_KEY_ID || !process.env.LUMAR_SECRET) {
+    console.error("You must set the LUMAR_USER_KEY_ID and LUMAR_SECRET environment variables.");
+    process.exit(1);
+  }
+
+  (async () => {
+    await main();
+    process.exit(0);
+  })().catch(error => {
+    console.error("Unexpected error has occurred!", error);
+    process.exit(1);
+  });
+}

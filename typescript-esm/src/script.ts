@@ -1,6 +1,6 @@
 import { GraphQLClient } from "graphql-request";
 
-import { getSdk } from "./sdk";
+import { getSdk } from "./sdk.js";
 
 async function main() {
   const client = new GraphQLClient("https://api.lumar.io/graphql", {
@@ -26,17 +26,15 @@ async function main() {
   console.log(JSON.stringify(accounts, null, 2));
 }
 
-if (require.main === module) {
-  if (!process.env.LUMAR_USER_KEY_ID || !process.env.LUMAR_SECRET) {
-    console.error("You must set the LUMAR_USER_KEY_ID and LUMAR_SECRET environment variables.");
-    process.exit(1);
-  }
-
-  (async () => {
-    await main();
-    process.exit(0);
-  })().catch(error => {
-    console.error("Unexpected error has occurred!", error);
-    process.exit(1);
-  });
+if (!process.env.LUMAR_USER_KEY_ID || !process.env.LUMAR_SECRET) {
+  console.error("You must set the LUMAR_USER_KEY_ID and LUMAR_SECRET environment variables.");
+  process.exit(1);
 }
+
+(async () => {
+  await main();
+  process.exit(0);
+})().catch(error => {
+  console.error("Unexpected error has occurred!", error);
+  process.exit(1);
+});
