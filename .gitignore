@@ -1,4 +1,4 @@
-typescript/node_modules/
-typescript/src/sdk.ts
+node_modules/
 
-**/schema.graphql
+schema.graphql
+sdk.ts

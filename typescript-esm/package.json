@@ -1,7 +1,7 @@
 {
-  "name": "typescript",
+  "name": "typescript-esm",
   "version": "1.0.0",
-  "description": "Example from [DeepCrawl GraphQL API Documentation](https://graph-docs.deepcrawl.com/docs/graphql-clients/typescript)",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "@graphql-codegen/cli": "^5.0.5",
     "@graphql-codegen/typescript-graphql-request": "^6.2.0",
